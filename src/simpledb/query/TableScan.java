@@ -62,6 +62,10 @@ public class TableScan implements UpdateScan {
    public String getString(String fldname) {
       return rf.getString(fldname);
    }
+
+   public int getTimeseries(String fldname) {
+      return rf.getTimeseries(fldname);
+   }
    
    public boolean hasField(String fldname) {
       return sch.hasField(fldname);
@@ -90,6 +94,10 @@ public class TableScan implements UpdateScan {
    public void setString(String fldname, String val) {
       rf.setString(fldname, val);
    }
+
+   public void setTimeseries(String fldname, int val) {
+      rf.setTimeseries(fldname, val);
+   }  
    
    public void delete() {
       rf.delete();

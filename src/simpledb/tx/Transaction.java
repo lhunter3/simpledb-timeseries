@@ -126,6 +126,21 @@ public class Transaction {
       Buffer buff = myBuffers.getBuffer(blk);
       return buff.getString(offset);
    }
+
+     /**
+    * Returns the integer value stored at the
+    * specified offset of the specified block.
+    * The method first obtains an SLock on the block,
+    * then it calls the buffer to retrieve the value.
+    * @param blk a reference to a disk block
+    * @param offset the byte offset within the block
+    * @return the integer stored at that offset
+    */
+   public int getTimeseries(Block blk, int offset) {
+      concurMgr.sLock(blk);
+      Buffer buff = myBuffers.getBuffer(blk);
+      return buff.getTimeseries(offset);
+   }
    
    /**
     * Stores an integer at the specified offset 
@@ -166,6 +181,28 @@ public class Transaction {
       int lsn = recoveryMgr.setString(buff, offset, val);
       buff.setString(offset, val, txnum, lsn);
    }
+
+
+    /**
+    * Stores an timeseries object (timestamp, int) at the specified offset 
+    * of the specified block.
+    * The method first obtains an XLock on the block.
+    * It then reads the current value at that offset,
+    * puts it into an update log record, and 
+    * writes that record to the log.
+    * Finally, it calls the buffer to store the value,
+    * passing in the LSN of the log record and the transaction's id. 
+    * @param blk a reference to the disk block
+    * @param offset a byte offset within that block
+    * @param val the value to be stored
+    */
+   public void setTimeseries(Block blk, int offset, int val) {
+      concurMgr.xLock(blk);
+      Buffer buff = myBuffers.getBuffer(blk);
+      int lsn = recoveryMgr.setTimeseries(buff, offset, val);
+      buff.setTimeseries(offset, val, txnum, lsn);
+   }
+
    
    /**
     * Returns the number of blocks in the specified file.

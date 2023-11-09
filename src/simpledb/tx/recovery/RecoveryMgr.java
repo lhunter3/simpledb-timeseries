@@ -87,6 +87,24 @@ public class RecoveryMgr {
          return new SetStringRecord(txnum, blk, offset, oldval).writeToLog();
    }
 
+
+     /**
+    * Writes a setint record to the log, and returns its lsn.
+    * Updates to temporary files are not logged; instead, a
+    * "dummy" negative lsn is returned.
+    * @param buff the buffer containing the page
+    * @param offset the offset of the value in the page
+    * @param newval the value to be written
+    */
+   public int setTimeseries(Buffer buff, int offset, int newval) {
+      int oldval = buff.getInt(offset);
+      Block blk = buff.block();
+      if (isTempBlock(blk))
+         return -1;
+      else
+         return new SetIntRecord(txnum, blk, offset, oldval).writeToLog();
+   }
+
    /**
     * Rolls back the transaction.
     * The method iterates through the log records,
@@ -134,4 +152,6 @@ public class RecoveryMgr {
    private boolean isTempBlock(Block blk) {
       return blk.fileName().startsWith("temp");
    }
+
+
 }

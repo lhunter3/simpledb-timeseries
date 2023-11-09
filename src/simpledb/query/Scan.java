@@ -47,6 +47,15 @@ public interface Scan {
     * @return the field's string value in the current record
     */
    public String   getString(String fldname);
+
+
+     /**
+    * Returns the value of the specified integer field 
+    * in the current record.
+    * @param fldname the name of the field
+    * @return the field's integer value in the current record
+    */
+   public int      getTimeseries(String fldname);
    
    /**
     * Returns true if the scan has the specified field.

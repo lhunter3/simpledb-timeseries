@@ -96,6 +96,20 @@ public class ProductScan implements Scan {
       else
          return s2.getString(fldname);
    }
+
+
+      /** 
+    * Returns the integer value of the specified field.
+    * The value is obtained from whichever scan
+    * contains the field.
+    * @see simpledb.query.Scan#getInt(java.lang.String)
+    */
+   public int getTimeseries(String fldname) {
+      if (s1.hasField(fldname))
+         return s1.getTimeseries(fldname);
+      else
+         return s2.getTimeseries(fldname);
+   }
    
    /**
     * Returns true if the specified field is in

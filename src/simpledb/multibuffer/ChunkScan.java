@@ -95,6 +95,14 @@ public class ChunkScan implements Scan {
    public String getString(String fldname) {
       return rp.getString(fldname);
    }
+
+   /**
+    * @see simpledb.query.Scan#getInt(java.lang.String)
+    */
+   public int getTimeseries(String fldname) {
+      return rp.getTimeseries(fldname);
+   }
+     
    
    /**
     * @see simpledb.query.Scan#hasField(java.lang.String)

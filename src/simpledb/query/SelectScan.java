@@ -59,6 +59,10 @@ public class SelectScan implements UpdateScan {
    public String getString(String fldname) {
       return s.getString(fldname);
    }
+
+   public int getTimeseries(String fldname) {
+      return s.getInt(fldname);
+   }
    
    public boolean hasField(String fldname) {
       return s.hasField(fldname);
@@ -79,6 +83,11 @@ public class SelectScan implements UpdateScan {
    public void setString(String fldname, String val) {
       UpdateScan us = (UpdateScan) s;
       us.setString(fldname, val);
+   }
+
+   public void setTimeseries(String fldname, int val) {
+      UpdateScan us = (UpdateScan) s;
+      us.setTimeseries(fldname, val);
    }
    
    public void delete() {

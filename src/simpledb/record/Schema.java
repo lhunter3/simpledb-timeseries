@@ -53,6 +53,17 @@ public class Schema {
    public void addStringField(String fldname, int length) {
       addField(fldname, VARCHAR, length);
    }
+
+     /**
+    * Adds a Timeseries field to the schema.
+    * there is no length for a timeseries field.
+    * @param fldname the name of the field
+    */
+   public void addTimeseriesField(String fldname) {
+      addField(fldname, JAVA_OBJECT, 0);
+   }
+
+
    
    /**
     * Adds a field to the schema having the same

@@ -156,4 +156,29 @@ public class Page {
       contents.putInt(byteval.length);
       contents.put(byteval);
    }
+
+
+
+   /**
+    * Returns the integer value at a specified offset of the page.
+    * If an integer was not stored at that location, 
+    * the behavior of the method is unpredictable.
+    * @param offset the byte offset within the page
+    * @return the integer value at that offset
+    */
+   public synchronized int getTimeseries(int offset) {
+      contents.position(offset);
+      return contents.getInt();
+   }
+   
+   /**
+    * Writes an integer to the specified offset on the page.
+    * @param offset the byte offset within the page
+    * @param val the integer to be written to the page
+    */
+   public synchronized void setTimeseries(int offset, int val) {
+      contents.position(offset);
+      contents.putInt(val);
+   }
+
 }

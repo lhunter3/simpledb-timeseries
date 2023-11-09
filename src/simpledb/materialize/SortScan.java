@@ -119,6 +119,16 @@ public class SortScan implements Scan {
       return currentscan.getString(fldname);
    }
    
+
+     /**
+    * Gets the integer value of the specified field
+    * of the current scan.
+    * @see simpledb.query.Scan#getInt(java.lang.String)
+    */
+   public int getTimeseries(String fldname) {
+      return currentscan.getTimeseries(fldname);
+   }
+
    /**
     * Returns true if the specified field is in the current scan.
     * @see simpledb.query.Scan#hasField(java.lang.String)

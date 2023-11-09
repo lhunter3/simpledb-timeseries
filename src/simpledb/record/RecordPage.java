@@ -70,6 +70,18 @@ public class RecordPage {
       int position = fieldpos(fldname);
       return tx.getString(blk, position);
    }
+
+
+      /**
+    * Returns the integer value stored for the
+    * specified field of the current record.
+    * @param fldname the name of the field.
+    * @return the integer stored in that field
+    */
+   public int getTimeseries(String fldname) {
+      int position = fieldpos(fldname);
+      return tx.getTimeseries(blk, position);
+   }
    
    /**
     * Stores an integer at the specified field
@@ -91,6 +103,18 @@ public class RecordPage {
    public void setString(String fldname, String val) {
       int position = fieldpos(fldname);
       tx.setString(blk, position, val);
+   }
+
+
+     /**
+    * Stores an integer at the specified field
+    * of the current record.
+    * @param fldname the name of the field
+    * @param val the integer value stored in that field
+    */
+   public void setTimeseries(String fldname, int val) {
+      int position = fieldpos(fldname);
+      tx.setTimeseries(blk, position, val);
    }
    
    /**

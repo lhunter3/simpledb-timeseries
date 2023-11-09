@@ -20,6 +20,8 @@ public interface UpdateScan extends Scan {
     * @param val the new integer value
     */
    public void setInt(String fldname, int val);
+
+   
    
    /**
     * Modifies the field value of the current record.
@@ -27,6 +29,14 @@ public interface UpdateScan extends Scan {
     * @param val the new string value
     */
    public void setString(String fldname, String val);
+
+
+      /**
+    * Modifies the field value of the current record.
+    * @param fldname the name of the field
+    * @param val the new integer value
+    */
+   public void setTimeseries(String fldname, int val);
    
    /**
     * Inserts a new record somewhere in the scan.

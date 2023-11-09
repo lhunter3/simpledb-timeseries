@@ -1,9 +1,3 @@
-/**
- * CS3543  Database Systems and Administration
-   Handson 3
-   Fall 2023
- */
-
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -13,6 +7,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.plaf.nimbus.State;
 
 import simpledb.metadata.MetadataMgr;
 import simpledb.record.Schema;
@@ -20,18 +15,20 @@ import simpledb.remote.SimpleDriver;
 import simpledb.server.SimpleDB;
 import simpledb.tx.Transaction;
 
-public class CS3543f23_handson3 {
+public class DbDriver {
 	  
 		public static void main(String args[]) {
-			CS3543f23_handson3 hon3 = new CS3543f23_handson3();
+			DbDriver hon3 = new DbDriver();
 			
 			//hon3.createTable();	// First, run this class (as a Java application) to create the customer table directly.
 			hon3.PrintTableInfo();	//Then, comment out the previous line,  uncomment this line and save. Start simpledb server and then run this class.
 			
+
+
 		}
 		
 		void createTable() {
-			SimpleDB.init("testdb"); 
+			SimpleDB.init("dbWithTimeseries"); 
 			MetadataMgr mdMgr = SimpleDB.mdMgr(); 
 			Transaction tx1 = new Transaction(); 
 			
@@ -40,12 +37,15 @@ public class CS3543f23_handson3 {
 			//**Hint: refer to lecture notes on simpledb metadata manager
 			
 			Schema s = new Schema();
-			s.addIntField("customerid");
-			s.addStringField("name", 20);
-			s.addStringField("address",40);
-			mdMgr.createTable("customer", s, tx1);
+
+			s.addIntField("tableid");
+			s.addTimeseriesField("tsInteger");
+			mdMgr.createTable("testTable", s, tx1);
 			
 			tx1.commit(); 
+
+			
+		
 		}
 		
 		//IMPORTANT: you would need to start simpledb server separately for this to work
@@ -57,10 +57,22 @@ public class CS3543f23_handson3 {
 				// Step 1: connect to database server
 				Driver d = new SimpleDriver();
 				conn = d.connect("jdbc:simpledb://localhost", null);
-				
+
+				/* 
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate("insert into customer(customerid, name, address) values(1, 'John', '123 Main St.')");
+				stmt.executeUpdate("insert into customer(customerid, name, address) values(2, 'Joe', '456 Main St.')");
+				stmt.executeUpdate("insert into customer(customerid, name, address) values(3, 'Jane', '789 Main St.')");
+				stmt.executeUpdate("insert into customer(customerid, name, address) values(4, 'Bob', '1011 Main St.')");
+
+				*/
+
 				Statement st = conn.createStatement();
-				
-				
+				//stmt.executeUpdate("insert into tableWithTimeseriesDatatype(tableid, timeseriesInteger) values(1, 2)");
+				//Statement st = conn.createStatement();
+
+
+
 				ResultSet rs = st.executeQuery("select tblname, fldname, type, length, offset from fldcat");
 				
 				while(rs.next()) {
@@ -68,6 +80,25 @@ public class CS3543f23_handson3 {
 					System.out.println(rs.getString("TblName") + ":" + rs.getString("fldName"));
 					
 				}
+				
+
+
+				
+				/*ResultSet rs2 = st.executeQuery("select tableid, timeseriesInteger from customer");
+
+
+				
+
+
+				System.out.println("test ");
+
+				
+				while(rs2.next()) {
+					
+					System.out.println(rs2.getInt("tableid") + " " + rs2.getString("timeseriesInteger"));
+					
+				}
+				*/
 				
 
 				

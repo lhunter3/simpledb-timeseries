@@ -94,6 +94,17 @@ public class MultiBufferProductScan implements Scan {
    public String getString(String fldname) {
       return prodscan.getString(fldname);
    }
+
+
+     /** 
+    * Returns the integer value of the specified field.
+    * The value is obtained from whichever scan
+    * contains the field.
+    * @see simpledb.query.Scan#getInt(java.lang.String)
+    */
+   public int getTimeseries(String fldname) {
+      return prodscan.getTimeseries(fldname);
+   }
    
    /**
     * Returns true if the specified field is in

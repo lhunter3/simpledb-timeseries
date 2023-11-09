@@ -1,0 +1,41 @@
+I- Timestamp as a Type:
+	
+	1) Created a class simpledb.query.timestamp.java which implements simpledb.query.Constant.java
+
+	2) Implemented a isValid(String s1) and extended constant() & modify() in simpledb.parse.Parser.java to correctly identify and store timestamp data type. Also added "timestamp" keyword in simpledb.parse.Lexer.java
+
+	3) Created a class simpledb.tx.recovery.SetTimestampRecord.java which implements simpledb.tx.recovery.LogRecord.java. It is used to update the Log Records(writeToLog()). 
+	Also implemented a function setTimestamp(Buffer buff, int offset, long newval) in simpledb.tx.recovey.RecoveryMgr.java
+	The following files were also changed
+		*simpledb.tx.recovery.LogRecordIterator.java
+		*simpledb.tx.recovery.LogRecord.java
+
+	4) Implemented addTimeStampField(String fldname) in simpledb.record.Schema.java 
+	& 
+	long getTimestamp() and void setTimestamp() in 
+		*simpledb.tx.Transaction.java
+		*simpledb.record.RecordPage.java
+		*simpledb.record.RecorFile.java
+		*simpledb.query.SelectScan.java
+		*simpledb.query.TableScan.java
+		*simpledb.query.Scan.java
+		*simpledb.query.ProjectScan.java
+		*simpledb.query.ProductScan.java
+		*simpledb.multibuffer.MultiBufferProductScan.java
+		*simpledb.multibuffer.ChunkScan.java
+		*simpledb.log.LogMgr.java
+		*simpledb.file.Page.java
+		*simpledb.buffer.Buffer.java
+	to insert, delete, and update timestamp datatype.
+	Also long nextTimestamp() in simpledb.log.BasicLogRecord.java
+
+	5) Implemented decrementnumrecs() and incrementnumrecs() in
+		*simpledb.query.TablePlan.java
+		*simpledb.query.SelectPlan.java
+		*simpledb.query.ProjectPlan.java
+		*simpledb.query.ProductPlan.java
+		*simpledb.query.Plan.java
+		*simpledb.multibuffer.MultiBufferProductPlan.java
+		*simpledb.metadata.StatInfo.java
+		*simpledb.materialize.MaterializePlan.java
+	   to maintain the number of records in any relation so that no more than 10^5 tuples are inserted in any relation. Throw an exception (MemoryError) if number of tuples exceeds 10^5.

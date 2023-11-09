@@ -79,6 +79,8 @@ public class IndexSelectScan implements Scan {
    public int getInt(String fldname) {
       return ts.getInt(fldname);
    }
+
+   
    
    /**
     * Returns the value of the field of the current data record.
@@ -88,6 +90,17 @@ public class IndexSelectScan implements Scan {
       return ts.getString(fldname);
    }
    
+
+
+      /**
+    * Returns the value of the field of the current data record.
+    * @see simpledb.query.Scan#getInt(java.lang.String)
+    */
+   public int getTimeseries(String fldname) {
+      return ts.getTimeseries(fldname);
+   }
+
+
    /**
     * Returns whether the data record has the specified field.
     * @see simpledb.query.Scan#hasField(java.lang.String)
