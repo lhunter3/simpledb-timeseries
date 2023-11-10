@@ -1,6 +1,7 @@
 package simpledb.query;
 
-import static java.sql.Types.INTEGER;
+import static java.sql.Types.*;
+
 import simpledb.tx.Transaction;
 import simpledb.record.*;
 
@@ -83,6 +84,8 @@ public class TableScan implements UpdateScan {
    public void setVal(String fldname, Constant val) {
       if (sch.type(fldname) == INTEGER)
          rf.setInt(fldname, (Integer)val.asJavaVal());
+      else if(sch.type(fldname) == JAVA_OBJECT)
+         rf.setTimeseries(fldname, (Integer)val.asJavaVal());
       else
          rf.setString(fldname, (String)val.asJavaVal());
    }

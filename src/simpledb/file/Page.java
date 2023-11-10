@@ -3,6 +3,7 @@ package simpledb.file;
 import simpledb.server.SimpleDB;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.sql.Date;
 
 /**
  * The contents of a disk block in memory.
@@ -50,7 +51,7 @@ public class Page {
     * a good idea to encode this value as a constant. 
     */
    public static final int INT_SIZE = Integer.SIZE / Byte.SIZE;
-   
+   public static final int LONG_SIZE = Long.SIZE / Byte.SIZE;
    /**
     * The maximum size, in bytes, of a string of length n.
     * A string is represented as the encoding of its characters,
@@ -166,9 +167,12 @@ public class Page {
     * @param offset the byte offset within the page
     * @return the integer value at that offset
     */
-   public synchronized int getTimeseries(int offset) {
+   public synchronized String getTimeseries(int offset) {
       contents.position(offset);
-      return contents.getInt();
+      int val = contents.getInt();
+      contents.position(offset + INT_SIZE);
+      Date time = new Date(contents.getLong());
+      return val + "|" + time; 
    }
    
    /**
@@ -179,6 +183,10 @@ public class Page {
    public synchronized void setTimeseries(int offset, int val) {
       contents.position(offset);
       contents.putInt(val);
+      contents.position(offset + INT_SIZE);
+      Date date = new Date(System.currentTimeMillis());
+      long timeInMillis = date.getTime();
+      contents.putLong(timeInMillis);
    }
 
 }
