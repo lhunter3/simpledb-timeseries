@@ -208,6 +208,10 @@ public class Parser {
          lex.eatKeyword("int");
          schema.addIntField(fldname);
       }
+      else if(lex.matchKeyword("timeseries")){
+         lex.eatKeyword("timeseries");
+         schema.addTimeseriesField(fldname);
+      }
       else {
          lex.eatKeyword("varchar");
          lex.eatDelim('(');
