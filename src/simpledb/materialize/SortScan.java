@@ -125,7 +125,7 @@ public class SortScan implements Scan {
     * of the current scan.
     * @see simpledb.query.Scan#getInt(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
+   public TimeseriesConstant getTimeseries(String fldname) {
       return currentscan.getTimeseries(fldname);
    }
 

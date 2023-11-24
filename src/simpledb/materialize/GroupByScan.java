@@ -125,8 +125,8 @@ public class GroupByScan implements Scan {
     * appropriate aggregation function.
     * @see simpledb.query.Scan#getVal(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
-      return (Integer)getVal(fldname).asJavaVal();
+   public TimeseriesConstant getTimeseries(String fldname) {
+      return (TimeseriesConstant)getVal(fldname).asJavaVal();
    }
    
    /* Returns true if the specified field is either a 

@@ -161,18 +161,23 @@ public class Page {
 
 
    /**
-    * Returns the integer value at a specified offset of the page.
-    * If an integer was not stored at that location, 
+    * Returns the Timeseries Datavalue and Time value at a specified offsets of the page.
+    * If vals are not stored at that location, 
     * the behavior of the method is unpredictable.
     * @param offset the byte offset within the page
-    * @return the integer value at that offset
+    * @return the int value of the timeseries at index 0, and the time value at index 1
     */
-   public synchronized String getTimeseries(int offset) {
+   public synchronized Long[] getTimeseries(int offset) {
+
+      Long[] arr = new Long[2];
+
       contents.position(offset);
-      int val = contents.getInt();
+      arr[0] =  (long) contents.getInt();
+
       contents.position(offset + INT_SIZE);
-      Date time = new Date(contents.getLong());
-      return val + "|" + time; 
+      arr[1] = contents.getLong();
+
+      return arr; 
    }
    
    /**

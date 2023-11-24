@@ -52,6 +52,10 @@ public class TableScan implements UpdateScan {
    public Constant getVal(String fldname) {
       if (sch.type(fldname) == INTEGER)
          return new IntConstant(rf.getInt(fldname));
+      else if(sch.type(fldname) == JAVA_OBJECT){
+         Long[] arr = rf.getTimeseries(fldname);
+         return new TimeseriesConstant(arr);
+      }
       else
          return new StringConstant(rf.getString(fldname));
    }
@@ -64,8 +68,8 @@ public class TableScan implements UpdateScan {
       return rf.getString(fldname);
    }
 
-   public int getTimeseries(String fldname) {
-      return rf.getTimeseries(fldname);
+   public TimeseriesConstant getTimeseries(String fldname) {
+      return new TimeseriesConstant(rf.getTimeseries(fldname));
    }
    
    public boolean hasField(String fldname) {

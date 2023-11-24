@@ -96,7 +96,7 @@ public class IndexSelectScan implements Scan {
     * Returns the value of the field of the current data record.
     * @see simpledb.query.Scan#getInt(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
+   public TimeseriesConstant getTimeseries(String fldname) {
       return ts.getTimeseries(fldname);
    }
 

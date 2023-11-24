@@ -73,12 +73,12 @@ public class RecordPage {
 
 
       /**
-    * Returns the integer value stored for the
+    * Returns the  value and time stored for the
     * specified field of the current record.
     * @param fldname the name of the field.
-    * @return the integer stored in that field
+    * @return the array for {data, time} stored in that field
     */
-   public int getTimeseries(String fldname) {
+   public Long[] getTimeseries(String fldname) {
       int position = fieldpos(fldname);
       return tx.getTimeseries(blk, position);
    }

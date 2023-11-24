@@ -54,7 +54,7 @@ public class SQLInterpreter {
 		    for(int i=1; i<=numcols; i++) {
 				int width = md.getColumnDisplaySize(i);
 				totalwidth += width;
-				String fmt = "%" + width + "s";
+				String fmt = "%" + 10 + "s";
 				System.out.format(fmt, md.getColumnName(i));
 			}
 			System.out.println();
@@ -70,6 +70,8 @@ public class SQLInterpreter {
 					String fmt = "%" + md.getColumnDisplaySize(i);
 					if (fldtype == Types.INTEGER)
 						System.out.format(fmt + "d", rs.getInt(fldname));
+					else if(fldtype == Types.JAVA_OBJECT)
+						System.out.format(fmt + "s", rs.getObject(fldname));
 					else
 						System.out.format(fmt + "s", rs.getString(fldname));
 				}

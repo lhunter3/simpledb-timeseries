@@ -113,11 +113,11 @@ public class IndexJoinScan implements Scan {
     * Returns the integer value of the specified field.
     * @see simpledb.query.Scan#getVal(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
+   public TimeseriesConstant getTimeseries(String fldname) {
       if (ts.hasField(fldname))
          return ts.getTimeseries(fldname);
       else  
-         return s.getTimeseries(fldname);
+         return ts.getTimeseries(fldname);
    }
    
    /** Returns true if the field is in the schema.

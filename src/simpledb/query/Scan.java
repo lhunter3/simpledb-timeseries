@@ -55,7 +55,7 @@ public interface Scan {
     * @param fldname the name of the field
     * @return the field's integer value in the current record
     */
-   public int      getTimeseries(String fldname);
+   public TimeseriesConstant      getTimeseries(String fldname);
    
    /**
     * Returns true if the scan has the specified field.

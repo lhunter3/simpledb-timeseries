@@ -87,7 +87,7 @@ public class RecordFile {
     * @param fldname the name of the field
     * @return the integer value at that field
     */
-   public int getTimeseries(String fldname) {
+   public Long[] getTimeseries(String fldname) {
       return rp.getTimeseries(fldname);
    }
    

@@ -133,7 +133,7 @@ public class MergeJoinScan implements Scan {
     * contains the field.
     * @see simpledb.query.Scan#getInt(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
+   public TimeseriesConstant getTimeseries(String fldname) {
       if (s1.hasField(fldname))
          return s1.getTimeseries(fldname);
       else

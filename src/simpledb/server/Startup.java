@@ -6,7 +6,7 @@ import java.rmi.registry.*;
 public class Startup {
    public static void main(String args[]) throws Exception {
       // configure and initialize the database
-      SimpleDB.init("dbWithTimeseries");
+      SimpleDB.init("hello-world");
       
       // create a registry specific for the server on the default port
       Registry reg = LocateRegistry.createRegistry(1099);

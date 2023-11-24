@@ -69,7 +69,7 @@ public class Buffer {
     * @param offset the byte offset of the page
     * @return the integer value at that offset
    */
-   public int getTimeseries(int offset) {
+   public Long[] getTimeseries(int offset) {
       return contents.getTimeseries(offset);
    }
 

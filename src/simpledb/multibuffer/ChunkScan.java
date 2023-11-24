@@ -99,8 +99,8 @@ public class ChunkScan implements Scan {
    /**
     * @see simpledb.query.Scan#getInt(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
-      return rp.getTimeseries(fldname);
+   public TimeseriesConstant getTimeseries(String fldname) {
+      return new TimeseriesConstant(rp.getTimeseries(fldname));
    }
      
    

@@ -102,7 +102,7 @@ public class MultiBufferProductScan implements Scan {
     * contains the field.
     * @see simpledb.query.Scan#getInt(java.lang.String)
     */
-   public int getTimeseries(String fldname) {
+   public TimeseriesConstant getTimeseries(String fldname) {
       return prodscan.getTimeseries(fldname);
    }
    

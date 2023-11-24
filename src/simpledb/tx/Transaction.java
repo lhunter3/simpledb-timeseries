@@ -136,7 +136,7 @@ public class Transaction {
     * @param offset the byte offset within the block
     * @return the integer stored at that offset
     */
-   public int getTimeseries(Block blk, int offset) {
+   public Long[] getTimeseries(Block blk, int offset) {
       concurMgr.sLock(blk);
       Buffer buff = myBuffers.getBuffer(blk);
       return buff.getTimeseries(offset);

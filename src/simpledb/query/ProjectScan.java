@@ -58,7 +58,7 @@ public class ProjectScan implements Scan {
    }
 
 
-     public int getTimeseries(String fldname) {
+     public TimeseriesConstant getTimeseries(String fldname) {
       if (hasField(fldname))
          return s.getTimeseries(fldname);
       else

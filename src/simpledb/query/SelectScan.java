@@ -60,8 +60,8 @@ public class SelectScan implements UpdateScan {
       return s.getString(fldname);
    }
 
-   public int getTimeseries(String fldname) {
-      return s.getInt(fldname);
+   public TimeseriesConstant getTimeseries(String fldname) {
+      return s.getTimeseries(fldname);
    }
    
    public boolean hasField(String fldname) {

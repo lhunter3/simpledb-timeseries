@@ -1,8 +1,6 @@
 package simpledb.query;
 // importing SimpleDateFormat to parse timestamps
 import java.text.SimpleDateFormat;
-// In case input string is not a timestamp 
-import java.text.ParseException;
 import java.util.Date;
 
 
@@ -11,12 +9,13 @@ public class TimeseriesConstant implements Constant {
    private int value;
    
    /**
-    * Create a constant by wrapping the specified string.
-    * @param value - int  timeseries value
+    * Create a constant by wrapping the specified data array.
+    * @param value - Long[] array of {value, date}
     */
-   public TimeseriesConstant(int value) throws ParseException {
-      this.time = new Date();
-      this.value = value;
+   public TimeseriesConstant(Long[] arr) {
+
+      this.value = arr[0].intValue();
+      this.time = new Date(arr[1]);
    }
 
   
@@ -44,8 +43,9 @@ public class TimeseriesConstant implements Constant {
    }
    
    public String toString() {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      String formattedDate = simpleDateFormat.format(time);
-      return  "["+ formattedDate +"\t" + Float.toString(value) + "]";
+
+      //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      //String formattedDate = simpleDateFormat.format(time);
+      return  "["+ this.time +"\t" + this.value + "]";
    }
 }
