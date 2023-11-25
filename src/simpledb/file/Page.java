@@ -181,17 +181,16 @@ public class Page {
    }
    
    /**
-    * Writes an integer to the specified offset on the page.
+    * Writes an integer and timestamp to the specified offsets on the page.
     * @param offset the byte offset within the page
     * @param val the integer to be written to the page
     */
    public synchronized void setTimeseries(int offset, int val) {
       contents.position(offset);
       contents.putInt(val);
+
       contents.position(offset + INT_SIZE);
-      Date date = new Date(System.currentTimeMillis());
-      long timeInMillis = date.getTime();
-      contents.putLong(timeInMillis);
+      contents.putLong(System.currentTimeMillis());
    }
 
 }
