@@ -1,6 +1,8 @@
 package simpledb;
 
 import java.sql.*;
+
+import simpledb.remote.RemoteResultSet;
 import simpledb.remote.SimpleDriver;
 import java.io.*;
 
@@ -70,8 +72,12 @@ public class SQLInterpreter {
 					String fmt = "%" + md.getColumnDisplaySize(i);
 					if (fldtype == Types.INTEGER)
 						System.out.format(fmt + "d", rs.getInt(fldname));
-					else if(fldtype == Types.JAVA_OBJECT)
-						System.out.format(fmt + "s", rs.getObject(fldname));
+					else if(fldtype == Types.JAVA_OBJECT){
+
+						//this is a hack to get the int value from the object 
+						//still learning how to do this properly to get the integer and the long values
+						System.out.format(fmt + "d", rs.getInt(fldname));
+					}
 					else
 						System.out.format(fmt + "s", rs.getString(fldname));
 				}
