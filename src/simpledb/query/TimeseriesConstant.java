@@ -44,9 +44,8 @@ public class TimeseriesConstant implements Constant, Serializable {
    }
    
    public String toString() {
-
-      //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      //String formattedDate = simpleDateFormat.format(time);
-      return  "["+ this.time +"\t" + this.value + "]";
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      String formattedDate = simpleDateFormat.format(this.time);
+      return  "["+ this.value  +"\t" + formattedDate + "]";
    }
 }
