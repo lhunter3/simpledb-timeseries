@@ -1,10 +1,11 @@
 package simpledb.query;
+import java.io.Serializable;
 // importing SimpleDateFormat to parse timestamps
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class TimeseriesConstant implements Constant {
+public class TimeseriesConstant implements Constant, Serializable {
    private Date time;
    private int value;
    

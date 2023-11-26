@@ -75,6 +75,17 @@ class RemoteResultSetImpl extends UnicastRemoteObject implements RemoteResultSet
       }
    }
 
+   public Object getObject(String fldname) throws RemoteException {
+      try {
+         fldname = fldname.toLowerCase(); // to ensure case-insensitivity
+         return s.getTimeseries(fldname);
+      }
+      catch(RuntimeException e) {
+         rconn.rollback();
+         throw e;
+      }
+   }
+
    /**
     * Returns the result set's metadata,
     * by passing its schema into the RemoteMetaData constructor.
@@ -92,5 +103,6 @@ class RemoteResultSetImpl extends UnicastRemoteObject implements RemoteResultSet
       s.close();
       rconn.commit();
    }
+
 }
 

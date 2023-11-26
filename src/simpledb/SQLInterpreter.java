@@ -76,7 +76,7 @@ public class SQLInterpreter {
 
 						//this is a hack to get the int value from the object 
 						//still learning how to do this properly to get the integer and the long values
-						System.out.format(fmt + "d", rs.getInt(fldname));
+						System.out.format(fmt + "s", rs.getObject(fldname));
 					}
 					else
 						System.out.format(fmt + "s", rs.getString(fldname));
