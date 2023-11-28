@@ -114,7 +114,20 @@ public class Term {
    public boolean isSatisfied(Scan s) {
       Constant lhsval = lhs.evaluate(s);
       Constant rhsval = rhs.evaluate(s);
-      return rhsval.equals(lhsval);
+
+      if(lhsval instanceof TimeseriesConstant && rhsval instanceof IntConstant){
+         TimeseriesConstant t = (TimeseriesConstant) lhsval;
+         return rhsval.equals(t.geIntConstant());
+      }
+      else if(lhsval instanceof TimeseriesConstant && rhsval instanceof StringConstant){
+         TimeseriesConstant t = (TimeseriesConstant) lhsval;
+         return rhsval.equals(t.geStringConstant());
+      }
+      else{
+         return rhsval.equals(lhsval);
+      }
+
+   
    }
    
    public String toString() {

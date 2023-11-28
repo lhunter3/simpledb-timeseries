@@ -1,5 +1,6 @@
 package simpledb.query;
 import java.io.Serializable;
+import java.sql.Time;
 // importing SimpleDateFormat to parse timestamps
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
 
 public class TimeseriesConstant implements Constant, Serializable {
    private Date time;
-   private int value;
+   private Integer value;
    
    /**
     * Create a constant by wrapping the specified data array.
@@ -28,10 +29,20 @@ public class TimeseriesConstant implements Constant, Serializable {
    public Object asJavaVal() {
       return this;
    }
+
+   public IntConstant geIntConstant(){
+      return new IntConstant(this.value);
+   }
+
+   public StringConstant geStringConstant(){
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      String formattedDate = simpleDateFormat.format(this.time);
+      return new StringConstant(formattedDate);
+   }
    
    public boolean equals(Object obj) {
-      TimeseriesConstant t = (TimeseriesConstant) obj;
-      return t != null && this.value == t.value;
+         TimeseriesConstant t =  (TimeseriesConstant) obj;
+         return t != null && this == t;
    }
 
    public int compareTo(Constant obj) {
