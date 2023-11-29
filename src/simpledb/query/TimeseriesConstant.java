@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class TimeseriesConstant implements Constant, Serializable {
-   private Date time;
+   private Integer trs;
    private Integer value;
    
    /**
@@ -17,7 +17,7 @@ public class TimeseriesConstant implements Constant, Serializable {
    public TimeseriesConstant(Long[] arr) {
 
       this.value = arr[0].intValue();
-      this.time = new Date(arr[1]);
+      this.trs = arr[1].intValue();
    }
 
   
@@ -34,10 +34,8 @@ public class TimeseriesConstant implements Constant, Serializable {
       return new IntConstant(this.value);
    }
 
-   public StringConstant geStringConstant(){
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      String formattedDate = simpleDateFormat.format(this.time);
-      return new StringConstant(formattedDate);
+   public IntConstant getTrsConstant(){
+      return new IntConstant(this.trs);
    }
    
    public boolean equals(Object obj) {
@@ -45,9 +43,11 @@ public class TimeseriesConstant implements Constant, Serializable {
          return t != null && this == t;
    }
 
+
+
    public int compareTo(Constant obj) {
       TimeseriesConstant t = (TimeseriesConstant) obj;
-      return Float.compare(this.value, t.value);
+      return this.trs.compareTo(t.trs);
    }
 
    public int hashCode() {
@@ -55,8 +55,6 @@ public class TimeseriesConstant implements Constant, Serializable {
    }
    
    public String toString() {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      String formattedDate = simpleDateFormat.format(this.time);
-      return  "["+ this.value  +"\t" + formattedDate + "]";
+      return  "["+ this.trs  +"\t" + this.trs + "]";
    }
 }

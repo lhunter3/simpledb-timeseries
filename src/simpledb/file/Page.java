@@ -1,5 +1,5 @@
 package simpledb.file;
-
+import java.time.LocalDateTime;
 import simpledb.server.SimpleDB;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -174,8 +174,8 @@ public class Page {
       contents.position(offset);
       arr[0] =  (long) contents.getInt();
 
-      contents.position(offset + INT_SIZE);
-      arr[1] = contents.getLong();
+      contents.position(offset);
+      arr[0] =  (long) contents.getInt();
 
       return arr; 
    }
@@ -190,7 +190,10 @@ public class Page {
       contents.putInt(val);
 
       contents.position(offset + INT_SIZE);
-      contents.putLong(System.currentTimeMillis());
+      //write function to create TRS using current time in relateion to from 1970-01-01 00:00:00 granularity of 1 hour
+      Date now = new Date(System.currentTimeMillis());
+      Date base = new Date(0);
+      contents.putInt((int)((now.getTime() - base.getTime())/ (60 * 60 * 1000) % 24));
    }
 
 }
