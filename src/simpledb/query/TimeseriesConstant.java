@@ -1,5 +1,8 @@
 package simpledb.query;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 
 
 public class TimeseriesConstant implements Constant, Serializable {
@@ -51,6 +54,14 @@ public class TimeseriesConstant implements Constant, Serializable {
    }
    
    public String toString() {
-      return  "["+ this.trs  +"\t" + this.value + "]";
+      // Convert hours back to milliseconds
+      long millis = this.trs * 60 * 60 * 1000L;
+
+      // Create a Date object based on the milliseconds from epoch
+      Date date = new Date(millis);
+
+      // Create a SimpleDateFormat to format the date
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH");
+      return  "["+ sdf.format(date)  +"\t" + this.value + "]";
    }
 }
