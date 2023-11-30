@@ -174,9 +174,8 @@ public class Page {
       contents.position(offset);
       arr[0] =  (long) contents.getInt();
 
-      contents.position(offset);
-      arr[0] =  (long) contents.getInt();
-
+      contents.position(offset + INT_SIZE);
+      arr[1] =  (long) contents.getInt();
       return arr; 
    }
    
@@ -193,7 +192,7 @@ public class Page {
       //write function to create TRS using current time in relateion to from 1970-01-01 00:00:00 granularity of 1 hour
       Date now = new Date(System.currentTimeMillis());
       Date base = new Date(0);
-      contents.putInt((int)((now.getTime() - base.getTime())/ (60 * 60 * 1000) % 24));
+      contents.putInt((int)((now.getTime() - base.getTime())/ (60 * 60 * 1000)));
    }
 
 }

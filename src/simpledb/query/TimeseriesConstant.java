@@ -1,9 +1,5 @@
 package simpledb.query;
 import java.io.Serializable;
-import java.sql.Time;
-// importing SimpleDateFormat to parse timestamps
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class TimeseriesConstant implements Constant, Serializable {
@@ -55,6 +51,6 @@ public class TimeseriesConstant implements Constant, Serializable {
    }
    
    public String toString() {
-      return  "["+ this.trs  +"\t" + this.trs + "]";
+      return  "["+ this.trs  +"\t" + this.value + "]";
    }
 }
