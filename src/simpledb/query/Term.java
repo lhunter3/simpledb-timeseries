@@ -111,7 +111,6 @@ public class Term {
     * @param s the scan
     * @return true if both expressions have the same value in the scan
     */
-    //TODO: FIX ME
    public boolean isSatisfied(Scan s) {
       Constant lhsval = lhs.evaluate(s);
       Constant rhsval = rhs.evaluate(s);
@@ -120,9 +119,9 @@ public class Term {
          TimeseriesConstant t = (TimeseriesConstant) lhsval;
          return rhsval.equals(t.geIntConstant());
       }
-      else if(lhsval instanceof TimeseriesConstant && rhsval instanceof IntConstant){
+      else if(lhsval instanceof TimeseriesConstant && rhsval instanceof StringConstant) {
          TimeseriesConstant t = (TimeseriesConstant) lhsval;
-         return rhsval.equals(t.getTrsConstant());
+         return rhsval.equals(t.getTrsStringConstant());
       }
       else{
          return rhsval.equals(lhsval);

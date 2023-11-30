@@ -37,11 +37,14 @@ public class TimeseriesConstant implements Constant, Serializable {
       return new IntConstant(this.trs);
    }
    
+   public StringConstant getTrsStringConstant(){
+      return new StringConstant(this.trsToString());
+   }
+
    public boolean equals(Object obj) {
          TimeseriesConstant t =  (TimeseriesConstant) obj;
          return t != null && this == t;
    }
-
 
 
    public int compareTo(Constant obj) {
@@ -54,14 +57,17 @@ public class TimeseriesConstant implements Constant, Serializable {
    }
    
    public String toString() {
-      // Convert hours back to milliseconds
-      long millis = this.trs * 60 * 60 * 1000L;
+      return  "["+ this.trsToString()  +"\t" + this.value + "]";
+   }
+
+   public String trsToString() { 
+       long millis = this.trs * 60 * 60 * 1000L;
 
       // Create a Date object based on the milliseconds from epoch
       Date date = new Date(millis);
 
       // Create a SimpleDateFormat to format the date
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH");
-      return  "["+ sdf.format(date)  +"\t" + this.value + "]";
+      return sdf.format(date);
    }
 }
