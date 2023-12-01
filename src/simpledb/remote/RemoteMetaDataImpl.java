@@ -79,7 +79,7 @@ public class RemoteMetaDataImpl extends UnicastRemoteObject implements RemoteMet
          return 6;  // accommodate 6-digit integers
       else if(fldtype == JAVA_OBJECT)
 
-         return 28; //for timeseries object.
+         return 30; //for timeseries object.
       else
          return fldlength;
    }
