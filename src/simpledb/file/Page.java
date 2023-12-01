@@ -167,15 +167,15 @@ public class Page {
     * @param offset the byte offset within the page
     * @return the int value of the timeseries at index 0, and the time value at index 1
     */
-   public synchronized Long[] getTimeseries(int offset) {
+   public synchronized int[] getTimeseries(int offset) {
 
-      Long[] arr = new Long[2];
+      int[] arr = new int[2];
 
       contents.position(offset);
-      arr[0] =  (long) contents.getInt();
+      arr[0] =  contents.getInt();
 
       contents.position(offset + INT_SIZE);
-      arr[1] =  (long) contents.getInt();
+      arr[1] =  contents.getInt();
       return arr; 
    }
    

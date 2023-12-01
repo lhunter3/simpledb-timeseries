@@ -78,7 +78,7 @@ public class RecordPage {
     * @param fldname the name of the field.
     * @return the array for {data, time} stored in that field
     */
-   public Long[] getTimeseries(String fldname) {
+   public int[] getTimeseries(String fldname) {
       int position = fieldpos(fldname);
       return tx.getTimeseries(blk, position);
    }

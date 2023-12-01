@@ -53,7 +53,7 @@ public class TableScan implements UpdateScan {
       if (sch.type(fldname) == INTEGER)
          return new IntConstant(rf.getInt(fldname));
       else if(sch.type(fldname) == JAVA_OBJECT){
-         Long[] arr = rf.getTimeseries(fldname);
+         int[] arr = rf.getTimeseries(fldname);
          return new TimeseriesConstant(arr);
       }
       else

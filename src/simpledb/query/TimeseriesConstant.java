@@ -13,10 +13,9 @@ public class TimeseriesConstant implements Constant, Serializable {
     * Create a constant by wrapping the specified data array.
     * @param value - Long[] array of {value, date}
     */
-   public TimeseriesConstant(Long[] arr) {
-
-      this.value = arr[0].intValue();
-      this.trs = arr[1].intValue();
+   public TimeseriesConstant(int[] arr) {
+      this.value = arr[0];
+      this.trs = arr[1];
    }
 
   
