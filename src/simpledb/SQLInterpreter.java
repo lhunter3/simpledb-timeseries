@@ -56,7 +56,7 @@ public class SQLInterpreter {
 		    for(int i=1; i<=numcols; i++) {
 				int width = md.getColumnDisplaySize(i);
 				totalwidth += width;
-				String fmt = "%" + 10 + "s";
+				String fmt = "%" + width + "s";
 				System.out.format(fmt, md.getColumnName(i));
 			}
 			System.out.println();
@@ -73,9 +73,6 @@ public class SQLInterpreter {
 					if (fldtype == Types.INTEGER)
 						System.out.format(fmt + "d", rs.getInt(fldname));
 					else if(fldtype == Types.JAVA_OBJECT){
-
-						//this is a hack to get the int value from the object 
-						//still learning how to do this properly to get the integer and the long values
 						System.out.format(fmt + "s", rs.getObject(fldname));
 					}
 					else
