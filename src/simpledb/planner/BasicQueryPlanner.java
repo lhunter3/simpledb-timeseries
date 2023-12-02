@@ -32,9 +32,15 @@ public class BasicQueryPlanner implements QueryPlanner {
       Plan p = plans.remove(0);
       for (Plan nextplan : plans)
          p = new ProductPlan(p, nextplan);
-      
+
+
       //Step 3: Add a selection plan for the predicate
       p = new SelectPlan(p, data.pred());
+
+      //Step 3.5: Add an aggregation plan if necessary
+      if(data.isAggregate()) {
+         p = new AggregatePlan(p, data.getAggregateField(), data.getAggregateFunction());
+      }
       
       //Step 4: Project on the field names
       p = new ProjectPlan(p, data.fields());

@@ -11,6 +11,9 @@ public class QueryData {
    private Collection<String> fields;
    private Collection<String> tables;
    private Predicate pred;
+   private boolean isAggregate;
+   private String aggregateField;
+   private String aggregateFunction;
    
    /**
     * Saves the field and table list and predicate.
@@ -19,6 +22,34 @@ public class QueryData {
       this.fields = fields;
       this.tables = tables;
       this.pred = pred;
+      this.isAggregate = false;
+   }
+
+   /**
+    * Saves aggregateField and aggregateFunction
+    *
+    */
+   public void setAggregateFunction(String aggregateField, String aggregateFunction) {
+      this.isAggregate = true;
+      this.aggregateField = aggregateField;
+      this.aggregateFunction = aggregateFunction;
+   }
+
+   /**
+    * Returns true if this query is an aggregate query. 
+    * Used in the BasicQueryPlanner to determine if a Aggregate plan is required.
+    * @return
+    */
+   public boolean isAggregate() {
+      return isAggregate;
+   }
+
+   public String getAggregateField() {
+      return aggregateField;
+   }
+
+   public String getAggregateFunction() {
+      return aggregateFunction;
    }
    
    /**

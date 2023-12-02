@@ -10,9 +10,13 @@ import simpledb.record.Schema;
  */
 public class Parser {
    private Lexer lex;
+   private String aggregateField;
+   private String aggregateFunction;
    
    public Parser(String s) {
       lex = new Lexer(s);
+      aggregateField = null;
+      aggregateFunction = null;
    }
    
 // Methods for parsing predicates, terms, expressions, constants, and fields
@@ -63,12 +67,30 @@ public class Parser {
          lex.eatKeyword("where");
          pred = predicate();
       }
-      return new QueryData(fields, tables, pred);
+      QueryData data = new QueryData(fields, tables, pred);
+
+      // Check if there is an aggregate function, if so set it in the query data
+      if(aggregateField != null && aggregateFunction != null){
+         data.setAggregateFunction(aggregateField, aggregateFunction);
+      }
+      return data;
    }
    
    private Collection<String> selectList() {
       Collection<String> L = new ArrayList<String>();
-      L.add(field());
+
+      if(lex.matchKeyword("sum")){
+         lex.eatKeyword("sum");
+         lex.eatDelim('(');
+         aggregateField = field();
+         L.add(aggregateField);
+         aggregateFunction = "sum";
+         lex.eatDelim(')');
+      }
+      else{
+         L.add(field());
+      }
+
       if (lex.matchDelim(',')) {
          lex.eatDelim(',');
          L.addAll(selectList());
