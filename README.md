@@ -27,6 +27,11 @@ All functionality can be executed directly with the SQLInterprator. No driver pr
 - `RemoteMetaDataImpl.java`
 - `RemoteResultSetImpl.java`
 
+## Individual Contribution
+We collaborated equally on most tasks, with each team member contributing to various aspects of the project. Specifically, Lucas took the lead in implementing the querying and Aggregate Scan. On the other hand, Jacob played a crucial role in researching the correct implementation when using a Time Reference System.
+
+The remaining programming aspects of the project were addressed together through pair programming sessions. We organized a few meetings to tackle the necessary steps for implementing the working datatype.
+
 
 ## Known Issues
 
